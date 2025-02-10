@@ -1,79 +1,55 @@
 package br.rythmood.music_service.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
 import java.util.UUID;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity
+@Table(name = "music")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Music {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private UUID id;
 
     @NotBlank(message = "Title cannot be blank")
     @Size(max = 100, message = "Title cannot be longer than 100 characters")
+    @Column(name = "title", length = 100, nullable = false)
     private String title;
 
     @NotNull(message = "Duration cannot be null")
+    @Column(name = "duration", nullable = false)
     private Integer duration;
 
     @NotBlank(message = "Lyrics cannot be blank")
+    @Column(name = "lyrics", columnDefinition = "TEXT", nullable = false)
     private String lyrics;
 
     @NotNull(message = "Track number cannot be null")
+    @Column(name = "track_number", nullable = false)
     private Integer trackNumber;
 
-    @NotNull(message = "Genres cannot be null")
+    @ElementCollection
+    @CollectionTable(name = "music_genres", joinColumns = @JoinColumn(name = "music_id"))
+    @Column(name = "genre")
     private List<String> genre;
 
     @NotBlank(message = "Audio URL cannot be blank")
+    @Column(name = "url_audio", nullable = false)
     private String urlAudio;
 
     @NotNull(message = "Explicit flag cannot be null")
+    @Column(name = "explicit", nullable = false)
     private Boolean explicit;
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void play() {
-        System.out.println("Playing the song: " + title);
-    }
-
-    public void pause() {
-        System.out.println("Pausing the song: " + title);
-    }
-
-    public void skip() {
-        System.out.println("Skipping to the next song.");
-    }
-
-    public void previous() {
-        System.out.println("Going back to the previous song.");
-    }
 }
+
 

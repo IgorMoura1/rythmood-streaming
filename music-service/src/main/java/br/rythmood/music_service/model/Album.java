@@ -34,12 +34,8 @@ public class Album {
 
     private List<Music> trackList = new ArrayList<>();
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void play() {
+        System.out.println("Playing the album: " + title);
     }
 
     public void addMusic(Music music) {
