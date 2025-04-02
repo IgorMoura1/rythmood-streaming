@@ -1,5 +1,7 @@
 package br.com.rythmood.user_service.model;
 
+import br.com.rythmood.playback_service.model.PlaybackQueue;
+import br.com.rythmood.playback_service.model.Reproduction;
 import br.rythmood.music_service.model.Playlist;
 import jakarta.persistence.*;
 import lombok.*;

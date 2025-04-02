@@ -1,5 +1,6 @@
 package br.com.rythmood.playback_service.model;
 
+import br.com.rythmood.audio_service.model.AudioQuality;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotNull;
